@@ -1,0 +1,165 @@
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <script src="/js/color.js"></script>
+    <script src='/js/baidu-analytics.js'></script>
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+
+
+
+<body>
+  <div class="message" hidden></div>
+  <div class="page">
+    <div class="header">
+      <span class="buttons"></span>
+
+      <button class="icon" onclick="toggle_theme()">
+        <div class='icon-wrapper'>
+          <div class='icon-inside'></div>
+        </div>
+      </button>
+    </div>
+
+<div class="blogs">
+  <a class="blog" href="/blogs/python_mutlithread.html">2021.12.04 Python多线程简单应用</a>
+</div class="blogs">
+
+
+<p>
+python默认单线程执行代码。多线程可减少程序所用时间
+<inline_code>for</inline_code>循环为例
+</p>
+
+<code>for iteratee in iterator:
+    function(iteratee)</code>
+
+
+<p>如果不关心迭代器<inline_code>iterator</inline_code>内元素排序
+可多线程执行<inline_code>for</inline_code>循环
+</p>
+
+<code>from multiprocessing.dummy import Pool
+with Pool(threads_num) as p:
+    p.map(function, iterator)
+</code>
+
+<p>线程并发进行，执行顺序与迭代器<inline_code>iterator</inline_code>内元素排序无关。而因使用<inline_code>map</inline_code>方法，返回结果与排序有关</p>
+
+<code>import time
+import numpy as np
+from multiprocessing.dummy import Pool
+
+np.random.seed(0)
+iterator = list('abcde')
+
+def pause_print_return(iteratee):
+    time.sleep(np.random.rand())
+    print(iteratee)
+    return iteratee
+
+# %%
+# foo
+with Pool(16) as p:
+    return_result = p.map(pause_print_return, iterator)
+    
+# %%
+# bar
+result = []
+for iteratee in iterator:
+    return_result.append(pause_print_return(iteratee))
+
+</code>
+
+<table>
+    <tr>
+      <th>code block</th>
+      <th>execute time</th>
+      <th>output</th>
+      <th>return_result</th>
+    </tr>
+    <tr>
+      <td>foo</td>
+      <td>726ms</td>
+      <td>edacb</td>
+      <td>['a', 'b', 'c', 'd', 'e']</td>
+    </tr>
+    <tr>
+      <td>bar</td>
+      <td>2.88s</td>
+      <td>abcde</td>
+      <td>['a', 'b', 'c', 'd', 'e']</td>
+    </tr>
+</table>
+
+<p>通过，执行顺序与迭代器<inline_code>iterator</inline_code>内元素排序无关</p>
+
+
+<p>
+应用1：爬虫
+</p>
+
+<code>import requests
+import pandas as pd
+from multiprocessing.dummy import Pool
+  
+pages = np.arange(20) + 1
+
+def crawler(page : int) -> pd.DataFrame:
+    
+    html = requests.get(\
+        f'http://stock.finance.sina.com.cn/stock/go.php/vReport_List/kind/lastest/index.phtml?p={page}')
+    dataframe = pd.read_html(html.text)[0].dropna()
+    return dataframe
+
+with Pool(16) as p:
+    result = p.map(crawler, pages)
+
+result = pd.concat(result).set_index('发布日期')
+</code>
+
+
+
+<p>
+应用2：网络扫描
+</p>
+
+<code>import telnetlib
+from multiprocessing.dummy import Pool
+
+def get_ip_status(ip):
+    server = telnetlib.Telnet()
+    port = 8
+    try:
+        server.open(ip, port)
+        print(f'{ip} port {port} is open')
+    finally:
+        server.close()
+
+host = ['122.6.186.'+str(i) for i in range(256)]
+with Pool(16) as p:
+    p.map(get_ip_status, host)
+</code>
+
+<p>除此，更优雅的多线程工具是<inline_code>dask</inline_code>
+</p>
+
+<p>
+于2022-08-13修改
+</p>
+
+
+
+    <div class="footer">
+        <div class="copyright">©2021-2022 Designed & Powered by Dacian Peng. All rights reserved.</div>
+        <!-- <span class="record" onclick="copy_and_open_url(this,'https://beian.miit.gov.cn/#/Integrated/index',true)" message="复制并跳转">京ICP备2021024692号-1</span> -->
+    </div>
+  </div>
+</body>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/icon.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/code.js"></script>
+<script src="/js/message.js"></script>
+<script src="/js/go_back_page.js"></script>
