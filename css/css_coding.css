@@ -40,6 +40,9 @@ textarea {
     left: 45%;
     cursor: pointer;
     z-index: 50;
+    line-height: 1;
+    display: flex;
+    align-items: center;
 }
 
 .back {
@@ -49,5 +52,20 @@ textarea {
     left: 41%;
     cursor: pointer;
     z-index: 50;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .run {
+        left: 45%;
+        font-size: 1.5rem;
+    }
+    
+    .back {
+        left: 40%;
+        font-size: 1.5rem;
+    }
 }
 

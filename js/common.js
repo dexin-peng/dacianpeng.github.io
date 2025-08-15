@@ -5,15 +5,8 @@ function add_buttons(){
     var blogs = document.createElement("span");
     blogs.setAttribute('class','part')
     blogs.setAttribute('onclick',"open_url('/index.html',false)")
-    blogs.innerHTML = '博客'
+    blogs.innerHTML = 'Home Page'
     document.getElementsByClassName("buttons")[0].appendChild(blogs);
-
-    var strategy = document.createElement("span");
-    strategy.setAttribute('class','part')
-    strategy.setAttribute('onclick',"open_url('/strategy.html',false)")
-    strategy.innerHTML = '策略'
-    document.getElementsByClassName("buttons")[0].appendChild(strategy);
-
 }
 
 
@@ -40,10 +33,68 @@ function copy(element){
 }
 
 function code_copy(element){
-    navigator.clipboard.writeText(element.parentElement.firstChild.nodeValue);
+    const codeText = element.parentElement.firstChild.nodeValue;
+    navigator.clipboard.writeText(codeText).then(() => {
+        const originalText = element.textContent;
+        element.textContent = '✓';
+        element.style.color = 'var(--standard-characters)';
+        element.setAttribute('message', 'Copied');
+        showMessage('Copied');
+        setTimeout(() => {
+            element.textContent = originalText;
+            element.style.color = '';
+            element.setAttribute('message', 'Copy');
+        }, 2000);
+    }).catch(() => {
+        showMessage('Copy failed');
+    });
 }
 
 function code_feedback(element){
+}
+
+function copyEmail() {
+    const email = 'dpeng965@connect.hkust-gz.edu.cn';
+    navigator.clipboard.writeText(email).then(() => {
+        const button = event.target.closest('.copy-button');
+        const originalIcon = button.querySelector('.copy-icon');
+        const originalText = originalIcon.textContent;
+        
+        originalIcon.textContent = '✓';
+        button.style.color = 'var(--standard-characters)';
+        
+        showMessage('Copied');
+        
+        setTimeout(() => {
+            originalIcon.textContent = originalText;
+            button.style.color = '';
+        }, 2000);
+    }).catch(() => {
+        showMessage('Copy failed');
+    });
+}
+
+function showMessage(text) {
+    const messageNode = document.getElementsByClassName('message')[0];
+    if (messageNode) {
+
+        if (sessionStorage.getItem('color-mode') == 'dark') {
+            messageNode.style.borderColor = '#fff';
+            messageNode.style.background = '#1a202c';
+            messageNode.style.color = '#fff';
+        } else {
+            messageNode.style.borderColor = '#000';
+            messageNode.style.background = '#fff';
+            messageNode.style.color = '#000';
+        }
+        
+        messageNode.textContent = text;
+        messageNode.removeAttribute('hidden');
+        
+        setTimeout(() => {
+            messageNode.setAttribute('hidden', '');
+        }, 2000);
+    }
 }
 
 

@@ -7,8 +7,6 @@ var StandardCharacterLight = '#000'
 var BackGroundDark = '#1a202c'
 var BackGroundLight = '#fff'
 
-
-
 var message = new (function () {
     this.follow = function (event) {
         node.style.left = event.clientX + window.scrollX + 20 + 'px';
