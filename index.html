@@ -9,10 +9,12 @@
 
 <body>
   <div class="message" hidden></div>
+  <div class="landscape-banner">
+    <img src="/asset/Landscape.JPG" class="landscape-photo">
+  </div>
+
   <div class="page">
-      <div class="header">
-        <span class="buttons"></span>
-  
+      <div class="content-header">
         <button class="icon" onclick="toggle_theme()">
           <div class='icon-wrapper'>
             <div class='icon-inside'></div>
@@ -20,29 +22,113 @@
         </button>
       </div>
 
-      <div class="blogs">
-        <!-- <a class="blog" href="/blogs/asynchronism_in_python.html">2022.XX.XX Python中的异步机制</a> -->
-        <!-- <br></br> -->
-        <a class="blog" href="/blogs/multiprocessing_memory_overflow.html">2022.08.26 不同等待时间的多进程内存溢出问题（勘误）</a>
-        <br></br>
-        <a class="blog" href="https://github.com/dacianpeng/Baker-Wurgler-2006-Investor-Sentiment-and-the-Cross-Section-of-Stock-Returns-toy-reproduce/blob/main/Baker-Wurgler(2006).ipynb" message="GitHub" target="_blank">2022.08.15 Toy Reproduce, Baker Wurgler 2006</a>
-        <br></br>
-        <a class="blog" href="https://github.com/dacianpeng/Fama-Macbeth-1973-Risk-Return-and-Equilibrium-Empirical-Tests-reproduce/blob/main/Fama-Macbeth(1973).ipynb" message="GitHub" target="_blank">2022.08.15 Reproduce, Fama-MacBeth 1973 </a>
-        <br></br>
-        <a class="blog" href="https://github.com/dacianpeng/Blitz-et-al.-2011-Residual-Momentum-toy-reproduce/blob/main/Residual%20Momentum.ipynb" message="GitHub" target="_blank">2022.08.15 Toy Reproduce, Blitz 2011</a>
-        <br></br>
-        <a class="blog" href="/blogs/golden_section_everywhere.html">2022.08.13 加入黄金比例</a>
-        <br></br>
-        <!-- <a class="blog" href="/blogs/dask_example.html">2022.XX.XX 更强的多线程工具：dask</a> -->
-        <!-- <br></br> -->
-        <a class="blog" href="/blogs/python_mutlithread.html">2021.12.04 Python多线程简单应用</a>
-        <br></br>
-        <a class="blog" href="/api/css_coding.html">2021.08.12 颜色主题源码</a>
-
+      <div class="profile-intro-section">
+        <div class="intro-container">
+          <h2 class="intro-title">Dexin PENG (彭德鑫)</h2>
+          <p class="intro-text">Quantitative Investor; High Frequency Trader</p>
+          <p class="intro-text">Third year PhD candidate at HKUST(GZ), Financial Technology Thrust</p>
+          <p class="intro-text"><br></p>
+          <p class="intro-text"><a href="/asset/DexinPENG_cv_Aug2025.pdf" class="cv-link" message="New Tab" target="_blank">Curriculum Vitae</a></p>
+        </div>
       </div>
+
+      <div class="blogs">
+        <div class="tag-filter-section">
+          <div class="filter-tags">
+            <span class="filter-tag active" onclick="filterByTag('all')">All</span>
+            <span class="filter-tag" onclick="filterByTag('toy-code')">Toy Code</span>
+            <span class="filter-tag" onclick="filterByTag('code')">Code</span>
+            <span class="filter-tag" onclick="filterByTag('design')">Design</span>
+            <span class="filter-tag" onclick="filterByTag('interactive')">Interactive</span>
+            <span class="filter-tag" onclick="filterByTag('blog')">Blog</span>
+          </div>
+        </div>
+        
+        <div class="blog-list">
+          <div class="blog-item" data-tags="toy-code">
+            <div class="blog-content">
+              <a class="blog" href="https://github.com/dacianpeng/Baker-Wurgler-2006-Investor-Sentiment-and-the-Cross-Section-of-Stock-Returns-toy-reproduce/blob/main/Baker-Wurgler(2006).ipynb" message="GitHub New Tab" target="_blank">2022.08.15 Toy Reproduce, Baker Wurgler 2006</a>
+              <div class="blog-tags">
+                <span class="tag">Toy Code</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="blog-item" data-tags="toy-code">
+            <div class="blog-content">
+              <a class="blog" href="https://github.com/dacianpeng/Fama-Macbeth-1973-Risk-Return-and-Equilibrium-Empirical-Tests-reproduce/blob/main/Fama-Macbeth(1973).ipynb" message="GitHub New Tab" target="_blank">2022.08.15 Toy Reproduce, Fama-MacBeth 1973</a>
+              <div class="blog-tags">
+                <span class="tag">Toy Code</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="blog-item" data-tags="toy-code">
+            <div class="blog-content">
+              <a class="blog" href="https://github.com/dacianpeng/Blitz-et-al.-2011-Residual-Momentum-toy-reproduce/blob/main/Residual%20Momentum.ipynb" message="GitHub New Tab" target="_blank">2022.08.15 Toy Reproduce, Blitz 2011</a>
+              <div class="blog-tags">
+                <span class="tag">Toy Code</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="blog-item" data-tags="code design interactive">
+            <div class="blog-content">
+              <a class="blog" href="/blogs/golden_section_everywhere.html">2022.08.13 Golden Ratio</a>
+              <div class="blog-tags">
+                <span class="tag">Code</span><span class="tag">Design</span><span class="tag">Interactive</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="blog-item" data-tags="toy-code blog">
+            <div class="blog-content">
+              <a class="blog" href="/blogs/python_mutlithread.html">2021.12.04 Simple Multi-threading in Python</a>
+              <div class="blog-tags">
+                <span class="tag">Toy Code</span><span class="tag">Blog</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="blog-item" data-tags="code design interactive">
+            <div class="blog-content">
+              <a class="blog" href="/api/css_coding.html">2021.08.12 Light & Dark Theme Toggle</a>
+              <div class="blog-tags">
+                <span class="tag">Code</span><span class="tag">Design</span><span class="tag">Interactive</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer-section">
+        <div class="contact-info">
+          <h3 class="contact-title">Contact Me</h3>
+          <div class="contact-details">
+            <p class="contact-item">
+              <span class="contact-label">Email:</span>
+              <span class="contact-text">dpeng965@connect.hkust-gz.edu.cn</span>
+              <button class="copy-button" onclick="copyEmail()" message="Copy Email">
+                <span class="copy-icon" message="Copy Email">📋</span>
+              </button>
+            </p>
+            <p class="contact-item">
+              <span class="contact-label">Phone:</span>
+              <span class="contact-text">+86 18811152739</span>
+            </p>
+          </div>
+        </div>
+        
+        <div class="copyright">
+          <p class="copyright-text">© 2020-2025 by Dexin PENG. All rights reserved.<br>Last updated: August 2025</p>
+          <p class="copyright-text"></p>
+        </div>
+      </footer>
+  </div>
 </body>
 
 
 <script src="/js/icon.js"></script>
 <script src="/js/common.js"></script>
+<script src="/js/filter.js"></script>
 <script src="/js/message.js"></script>

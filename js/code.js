@@ -5,6 +5,6 @@ for (element of codes) {
     copy_button.innerHTML = '📋'
     element.appendChild(copy_button)
     copy_button.setAttribute('onclick', 'code_copy(this)')
-    copy_button.setAttribute('message', '点击复制')
+    copy_button.setAttribute('message', 'Copy')
 }
 
